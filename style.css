@@ -28,11 +28,11 @@ body {
 }
 
 .fade-in {
-  animation: fadeIn 2s 1;
+  animation: fadeIn 2s ease-in 1;
 }
 
 .fade-out {
-  animation: fadeOut 2s 1;
+  animation: fadeOut 2s ease-out 1;
 }
 
 .quote-text {
@@ -109,6 +109,7 @@ button:active {
 
 @keyframes fadeIn {
   0% { opacity: 0; }
+  /* 50% { opacity: 0.25; } */
   100% { opacity: 1; }
 }
 
