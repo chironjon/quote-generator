@@ -24,6 +24,7 @@ randomBGColor = () => {
 
 fadeIn = () => {
   newQuoteBtn.disabled = true;
+  setTimeout(() => newQuoteBtn.disabled = false, 2000);
   randomBGColor();
   quoteContainer.classList.add('fade-in');
   setTimeout(function(){quoteContainer.classList.remove('fade-in');}, 2000);
@@ -50,7 +51,6 @@ showNewQuote = () => {
     quoteText.classList.remove('long-quote');
   }
   quoteText.textContent = quote.text;
-  setTimeout(() => newQuoteBtn.disabled = false, 2000);
   removeSpinner();
 }
 
