@@ -32,7 +32,7 @@ fadeIn = () => {
 fadeOut = () => {
   newQuoteBtn.disabled = true;
   quoteContainer.classList.add('fade-out'); // add fade out class then remove after 1.8s
-  setTimeout(() => quoteContainer.classList.remove('fade-out'), 2000);
+  setTimeout(() => quoteContainer.classList.remove('fade-out'), 1900);
   setTimeout(() => getQuotes(), 1600) // run get quotes right as animation clears
 }
 
