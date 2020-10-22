@@ -7,9 +7,11 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-displaySpinner = () => {loader.hidden = false}
+displaySpinner = () => {loader.hidden = false; quoteContainer.hidden = true}
 
-removeSpinner = () => {loader.hidden = true}
+removeSpinner = () => {loader.hidden = true; quoteContainer.hidden = false}
+
+buttonDsblAbl = () => {newQuoteBtn.disabled = !newQuoteBtn.disabled}
 
 randomBGColor = () => {
   let colors = [];
@@ -17,24 +19,26 @@ randomBGColor = () => {
     colors[i] = Math.floor(Math.random() * 256);
   }
   let randColor = "rgb(" + colors[0] + "," + colors[1] + "," + colors[2] + ")";
-  console.log(randColor);
   document.body.style.background = randColor;
   return null;
 }
 
 fadeIn = () => {
-  newQuoteBtn.disabled = true;
-  setTimeout(() => newQuoteBtn.disabled = false, 2000);
-  randomBGColor();
   quoteContainer.classList.add('fade-in');
-  setTimeout(function(){quoteContainer.classList.remove('fade-in');}, 2000);
+  setTimeout(() => {
+    quoteContainer.classList.remove('fade-in');
+    buttonDsblAbl();
+  }, 980);
 }
 
 fadeOut = () => {
-  newQuoteBtn.disabled = true;
-  quoteContainer.classList.add('fade-out'); // add fade out class then remove after 1.8s
-  setTimeout(() => quoteContainer.classList.remove('fade-out'), 1900);
-  setTimeout(() => getQuotes(), 1900) // run get quotes right as animation clears
+  buttonDsblAbl();
+  quoteContainer.classList.add('fade-out');
+  setTimeout(() => {
+    randomBGColor(); 
+    quoteContainer.classList.remove('fade-out'); 
+    getQuotes();
+  }, 900);
 }
 
 showNewQuote = () => {
@@ -54,10 +58,8 @@ showNewQuote = () => {
   removeSpinner();
 }
 
-// Get quote from API
 getQuotes = async () => {
   displaySpinner();
-  fadeIn();
   const proxyUrl = 'https://mysterious-savannah-75912.herokuapp.com/'
   const apiUrl = 'http://type.fit/api/quotes';
   try {
@@ -67,17 +69,18 @@ getQuotes = async () => {
   } catch (error) {
     console.log(error);
   }
+  fadeIn();
 }
 
-// Tweet Quote
 tweetQuote = () => {
   const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} = ${authorText.textContent}`;
   window.open(twitterUrl, '_blank');
 }
 
-//Event Listeners
 newQuoteBtn.addEventListener('click', fadeOut);
 twitterBtn.addEventListener('click', tweetQuote);
 
 // On Load
+randomBGColor();
+buttonDsblAbl();
 getQuotes();
