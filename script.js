@@ -58,9 +58,10 @@ showNewQuote = () => {
 getQuotes = async () => {
   displaySpinner();
   fadeIn();
+  const proxyUrl = 'https://mysterious-savannah-75912.herokuapp.com/'
   const apiUrl = 'http://type.fit/api/quotes';
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(proxyUrl + apiUrl);
     apiQuotes = await response.json();
     showNewQuote();
   } catch (error) {
