@@ -28,7 +28,7 @@ fadeIn = () => {
   setTimeout(() => {
     quoteContainer.classList.remove('fade-in');
     buttonDsblAbl();
-  }, 980);
+  }, 1000);
 }
 
 fadeOut = () => {
@@ -36,18 +36,18 @@ fadeOut = () => {
   quoteContainer.classList.add('fade-out');
   setTimeout(() => {
     randomBGColor(); 
-    quoteContainer.classList.remove('fade-out'); 
     getQuotes();
-  }, 900);
+    quoteContainer.classList.remove('fade-out'); 
+  }, 1000);
 }
 
 showNewQuote = () => {
   displaySpinner();
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
   if (!quote.author) {
-    authorText.textContent = 'Unknown';
+    authorText.textContent = 'Unknown_';
   } else {
-    authorText.textContent = quote.author;
+    authorText.textContent = quote.author + "_";
   }
   if (quote.text.length > 120) {
     quoteText.classList.add('long-quote');
@@ -66,10 +66,10 @@ getQuotes = async () => {
     const response = await fetch(proxyUrl + apiUrl);
     apiQuotes = await response.json();
     showNewQuote();
+    fadeIn();
   } catch (error) {
     console.log(error);
   }
-  fadeIn();
 }
 
 tweetQuote = () => {
