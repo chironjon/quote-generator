@@ -19,6 +19,7 @@ randomBGColor = () => {
   let randColor = "rgb(" + colors[0] + "," + colors[1] + "," + colors[2] + ")";
   console.log(randColor);
   document.body.style.background = randColor;
+  return null;
 }
 
 fadeIn = () => {
